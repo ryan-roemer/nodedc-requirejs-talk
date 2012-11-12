@@ -1,9 +1,9 @@
 extends layout
 
 block slides
+
   section.slide#title
-    h1 Better Dependency Management with RequireJS
-      .subtitle TODO: Better title, with JS in it
+    h1 Shared Code with RequireJS
 
   section.slide#amd
     :markdown
@@ -13,7 +13,7 @@ block slides
       a framework for defining JavaScript modules and dependencies for
       predictable loading.
 
-      * A functional subset of / transport for [CommonJS][cjs]
+      * A fork of / transport for [CommonJS][cjs]
       * Brings `require`-like support to the frontend.
 
       [amd]: https://github.com/amdjs/amdjs-api/wiki/AMD
@@ -26,7 +26,6 @@ block slides
       * Frontend JavaScript dependencies are a mess.
       * Allow us the real potential to have **shared** code between the
         frontend and a backend Node.js server.
-
         * Validation
         * Internationalization
 
@@ -51,6 +50,8 @@ block slides
 
       TODO -- Just dive right in to shared sample code
       (without header at first)
+
+      * TODO: Have a dependency on underscore
 
   section.slide#require-frontend
     :markdown
