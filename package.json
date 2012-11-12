@@ -6,7 +6,8 @@
   "homepage": "http://ryan-roemer.github.com/deckjs-starter/",
   "dependencies": {
     "express": "3.0.2",
-    "requirejs": "2.1.1"
+    "requirejs": "2.1.1",
+    "underscore": "1.4.2"
   },
   "devDependencies": {
     "jade": "0.27.6",
