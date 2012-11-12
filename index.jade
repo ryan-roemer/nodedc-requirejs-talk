@@ -3,6 +3,7 @@ extends layout
 block slides
   section.slide#title
     h1 Better Dependency Management with RequireJS
+      .subtitle TODO: Better title, with JS in it
 
   section.slide#amd
     :markdown
@@ -29,9 +30,39 @@ block slides
         * Validation
         * Internationalization
 
-  section.slide#requirejs
+  section.slide#require
     :markdown
       ## RequireJS
+
+      [RequireJS][requirejs] is an AMD-compatible script loader (and much
+      more) with features including:
+
+      * **Asynchronous** script loading
+      * Frontend asset **bundling**
+      * **Plugins**: Internationalization, text (templates)
+      * **Node.js** compatibility
+
+      [requirejs]: http://requirejs.org/
+
+  section.slide#require-frontend
+    :markdown
+      ## RequireJS on the Frontend
+
+      * Data main starting point
+      * Configuration
+      * Module definitions
+
+  section.slide#require-data-main
+    :markdown
+      ## RequireJS Main
+
+      Let's start with a main insertion point.
+
+
+
+  section.slide#extra
+    :markdown
+      ## Extra Notes
 
       TODO: HERE -- basics and outline rest.
 
@@ -41,4 +72,7 @@ block slides
       * Shared code.
       * Bundling.
       * Plugins.
+
+      * [jsplayground]: http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction
+
 

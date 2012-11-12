@@ -1,20 +1,23 @@
 {
-  "name": "deckjs-boilerplate",
+  "name": "deckjs-starter",
   "version": "0.0.1",
-  "description": "Configuration control for production node deployments",
+  "description": "Deck.js Starter",
   "author": "Ryan Roemer <ryan@loose-bits.com>",
-  "homepage": "http://ryan-roemer.github.com/deckjs-boilerplate/",
+  "homepage": "http://ryan-roemer.github.com/deckjs-starter/",
   "dependencies": {
+    "express": "3.0.2"
   },
   "devDependencies": {
     "jade": "0.27.6",
-    "markdown": "0.4.0"
+    "markdown": "0.4.0",
+    "nodemon": "0.6.23"
   },
   "engines": {
     "node": ">0.6.x"
   },
   "scripts": {
     "build": "./node_modules/.bin/jade index.jade",
-    "watch": "./node_modules/.bin/jade -w index.jade"
+    "watch": "./node_modules/.bin/jade -w index.jade",
+    "demo": "nodemon ./demo/lib-server/server.js"
   }
 }
