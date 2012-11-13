@@ -3,7 +3,7 @@ extends layout
 block slides
 
   section.slide#title
-    h1 Shared Code with RequireJS
+    h1 Shared Code with AMD/RequireJS
 
   section.slide#amd
     :markdown
@@ -26,23 +26,6 @@ block slides
       * Frontend JavaScript dependencies are a mess.
       * Allow us the real potential to have **shared** code between the
         frontend and a backend Node.js server.
-        * Validation
-        * Internationalization
-
-  section.slide#require
-    :markdown
-      ## RequireJS
-
-      [RequireJS][requirejs] is an AMD-compatible script loader (and much
-      more) with features including:
-
-      * Sensible **module definition** format
-      * **Asynchronous** script loading
-      * Frontend asset **bundling**
-      * **Plugins**: Internationalization, text (templates)
-      * **Node.js** compatibility
-
-      [requirejs]: http://requirejs.org/
 
   section.slide#sample-code
     :markdown
@@ -64,7 +47,7 @@ block slides
 
   section.slide#require-nodejs
     :markdown
-      ## Prep for RequireJS
+      ## Prep for AMD
 
       Use the [amdefine][amdefine] module in a standard boilerplate.
 
@@ -94,6 +77,21 @@ block slides
 
         return res.json(shuffled, 200);
       });
+
+  section.slide#require
+    :markdown
+      ## RequireJS
+
+      [RequireJS][requirejs] is an AMD-compatible script loader (and much
+      more) with features including:
+
+      * Sensible **module definition** format
+      * **Asynchronous** script loading
+      * Frontend asset **bundling**
+      * **Plugins**: Internationalization, text (templates)
+      * **Node.js** compatibility
+
+      [requirejs]: http://requirejs.org/
 
   section.slide#require-frontend
     :markdown
@@ -140,6 +138,9 @@ block slides
       * Shared code.
       * Bundling.
       * Plugins.
+      * Curiosity Media use cases.
+        * Validation
+        * Internationalization
 
       * [jsplayground]: http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction
 
