@@ -39,17 +39,19 @@ block slides
     textarea.code#code(name="code", mode="javascript", style="display: none;").
       var _ = require('underscore');
 
-      // Shuffle a list (space/comma separated).
+      // Shuffle a list string.
       var shuffle = function (val) {
         val = val || "";
         return _.shuffle(val.split(/[\s,]+/));
       };
+    //-
 
   section.slide#require-nodejs
     :markdown
       ## Prep for AMD
 
-      Use the [amdefine][amdefine] module in a standard boilerplate.
+      Use the [amdefine][amdefine] module in a standard boilerplate and
+      wrap our module in a `define`.
 
       [amdefine]: https://github.com/jrburke/amdefine
 
@@ -57,6 +59,16 @@ block slides
       if (typeof define !== 'function') {
         var define = require('amdefine')(module);
       }
+
+      define(function(require) {
+        var _ = require('underscore');
+
+        return function shuffle(val) {
+          val = val || "";
+          return _.shuffle(val.split(/[\s,]+/));
+        };
+      });
+    //-
 
   section.slide#express
     :markdown
@@ -77,6 +89,7 @@ block slides
 
         return res.json(shuffled, 200);
       });
+    //-
 
   section.slide#require
     :markdown

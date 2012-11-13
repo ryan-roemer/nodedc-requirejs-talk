@@ -12,17 +12,25 @@ frontend and a backend Node.js server.</li></ul></section><section id="sample-co
 <p>Looks like a basic Node.js backend function with a dependency on
 <a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">var _ = require('underscore');
 
-// Shuffle a list (space/comma separated).
+// Shuffle a list string.
 var shuffle = function (val) {
   val = val || "";
   return _.shuffle(val.split(/[\s,]+/));
-};
-</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for AMD</h2>
+};</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for AMD</h2>
 
-<p>Use the <a href="https://github.com/jrburke/amdefine">amdefine</a> module in a standard boilerplate.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
+<p>Use the <a href="https://github.com/jrburke/amdefine">amdefine</a> module in a standard boilerplate and
+wrap our module in a <code>define</code>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
   var define = require('amdefine')(module);
 }
-</textarea></section><section id="express" class="slide"><h2>Express REST API</h2>
+
+define(function(require) {
+  var _ = require('underscore');
+  
+  return function shuffle(val) {
+    val = val || "";
+    return _.shuffle(val.split(/[\s,]+/));
+  };
+});</textarea></section><section id="express" class="slide"><h2>Express REST API</h2>
 
 <p>Let&#39;s create a JSON <a href="http://127.0.0.1:3003/shuffle?val=1+2+3+4+5">REST API</a> with our new function.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">// At the top...
 var shuffle = require('../lib-shared/shuffle');
@@ -33,8 +41,7 @@ app.get("/shuffle", function (req, res) {
     shuffled = shuffle(input);
     
   return res.json(shuffled, 200);
-});
-</textarea></section><section id="require" class="slide"><h2>RequireJS</h2>
+});</textarea></section><section id="require" class="slide"><h2>RequireJS</h2>
 
 <p><a href="http://requirejs.org/">RequireJS</a> is an AMD-compatible script loader (and much
 more) with features including:</p>
