@@ -1,6 +1,9 @@
 // Configure require.
 require.config({
   shim: {
+    "underscore": {
+      exports: "_"
+    },
     "bootstrap": {
       deps: ["jquery"],
       exports: "$"
@@ -23,28 +26,30 @@ require([
   $(function () {
     // Bind shuffle to the client side form.
     $("form#client").submit(function () {
-
-      // var shuffle = function (val) {
-      //   val = val || "";
-      //   return _.shuffle(val.split(/[\s,]+/));
-      // };
-
-      try {
-        console.log(shuffle);
-        console.log(shuffle("1 2 3 4"));
-      } catch (err) {
-        console.log(err.stack);
-        return false;
-      }
-
-      return false;
-
       var input = $("form#client #input").val(),
-        shuffled = shuffle("1"),
+        shuffled = shuffle(input),
         $output = $("form#client #output");
 
-      console.log("TODO HERE SHUFFLED", _, shuffled);
-      $output.text(shuffled);
+      $output.text(shuffled.join(", "));
+
+      return false;
+    });
+
+    // AJAX get shuffle with the server side form.
+    $("form#server").submit(function () {
+      var input = $("form#server #input").val(),
+        $output = $("form#server #output");
+
+      $.ajax({
+        url: "/shuffle",
+        data: {
+          val: input
+        },
+        success: function (shuffled) {
+          $output.text(shuffled.join(", "));
+        },
+        dataType: "json"
+      });
 
       return false;
     });
