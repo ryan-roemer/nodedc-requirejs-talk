@@ -14,14 +14,13 @@ require.config({
   paths: {
     "underscore": "vendor/underscore-min-1.4.2",
     "jquery":     "vendor/jquery-min-1.8.1",
-    "bootstrap":  "vendor/bootstrap-min-2.2.1",
-    "shuffle":    "../lib-shared/shuffle"
+    "bootstrap":  "vendor/bootstrap-min-2.2.1"
   },
 });
 
 require([
   "bootstrap",
-  "shuffle"
+  "../lib-shared/shuffle"
 ], function($, shuffle) {
   $(function () {
     // Bind shuffle to the client side form.

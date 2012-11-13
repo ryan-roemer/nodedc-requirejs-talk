@@ -27,6 +27,16 @@ block slides
       * Allow us the real potential to have **shared** code between the
         frontend and a backend Node.js server.
 
+  section.slide#demo
+    :markdown
+      ## Our Project
+
+      Let's start with a small project:
+
+          lib-shared/shuffle.js
+          lib-server/server.js
+          lib-client/main.js
+
   section.slide#sample-code
     :markdown
       ## Shuffle!
@@ -36,15 +46,18 @@ block slides
 
       [underscore]: http://underscorejs.org/
 
-    textarea.code#code(name="code", mode="javascript", style="display: none;").
-      var _ = require('underscore');
-
+    textarea.code#code(name="code", mode="javascript",
+                       runnable="true", globals="_", style="display: none;").
       // Shuffle a list string.
       var shuffle = function (val) {
         val = val || "";
         return _.shuffle(val.split(/[\s,]+/));
       };
+
+      // Examples
+      console.log(shuffle("1 2 3 4"));
     //-
+
 
   section.slide#require-nodejs
     :markdown
@@ -98,11 +111,9 @@ block slides
       [RequireJS][requirejs] is an AMD-compatible script loader (and much
       more) with features including:
 
-      * Sensible **module definition** format
       * **Asynchronous** script loading
       * Frontend asset **bundling**
       * **Plugins**: Internationalization, text (templates)
-      * **Node.js** compatibility
 
       We will use this as our bridge to the frontend.
 
@@ -112,13 +123,9 @@ block slides
     :markdown
       ## RequireJS on the Frontend
 
-      TODO - HERE
-
-      * Match version dependencies (underscore).
-
-      * Module definitions
       * Data main starting point
       * Configuration
+      * Module definitions
 
   section.slide#require-data-main
     :markdown
@@ -126,14 +133,22 @@ block slides
 
       Let's start with a main insertion point.
 
-      TODO
+    textarea.code#code(name="code", mode="xml", style="display: none;").
+      <script data-main="./lib-client/main"
+              src="./lib-client/vendor/require-2.1.1.js"
+              type="text/javascript"></script>
+    //-
 
-  section.slide#require-client-integration
+  section.slide#require-config
     :markdown
-      ## TODO
+      ## RequireJS Configuration
 
       TODO
 
+
+      TODO - HERE
+
+      * Match version dependencies (underscore).
 
   section.slide#other-resources
     :markdown

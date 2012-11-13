@@ -7,16 +7,24 @@ predictable loading.</p>
 <ul><li>A fork of / transport for <a href="http://www.commonjs.org/">CommonJS</a></li><li>Brings <code>require</code>-like support to the frontend.</li></ul></section><section id="why" class="slide"><h2>Why AMD?</h2>
 
 <ul><li>Frontend JavaScript dependencies are a mess.</li><li>Allow us the real potential to have <strong>shared</strong> code between the
-frontend and a backend Node.js server.</li></ul></section><section id="sample-code" class="slide"><h2>Shuffle!</h2>
+frontend and a backend Node.js server.</li></ul></section><section id="demo" class="slide"><h2>Our Project</h2>
+
+<p>Let&#39;s start with a small project:</p>
+
+<pre><code>lib-shared/shuffle.js
+lib-server/server.js
+lib-client/main.js
+</code></pre></section><section id="sample-code" class="slide"><h2>Shuffle!</h2>
 
 <p>Looks like a basic Node.js backend function with a dependency on
-<a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">var _ = require('underscore');
-
-// Shuffle a list string.
+<a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" runnable="true" globals="_" style="display: none;" class="code">// Shuffle a list string.
 var shuffle = function (val) {
   val = val || "";
   return _.shuffle(val.split(/[\s,]+/));
-};</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for AMD</h2>
+};
+
+// Examples
+console.log(shuffle("1 2 3 4"));</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for AMD</h2>
 
 <p>Use the <a href="https://github.com/jrburke/amdefine">amdefine</a> module in a standard boilerplate and
 wrap our module in a <code>define</code>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
@@ -46,25 +54,27 @@ app.get("/shuffle", function (req, res) {
 <p><a href="http://requirejs.org/">RequireJS</a> is an AMD-compatible script loader (and much
 more) with features including:</p>
 
-<ul><li>Sensible <strong>module definition</strong> format</li><li><strong>Asynchronous</strong> script loading</li><li>Frontend asset <strong>bundling</strong></li><li><strong>Plugins</strong>: Internationalization, text (templates)</li><li><strong>Node.js</strong> compatibility</li></ul>
+<ul><li><strong>Asynchronous</strong> script loading</li><li>Frontend asset <strong>bundling</strong></li><li><strong>Plugins</strong>: Internationalization, text (templates)</li></ul>
 
 <p>We will use this as our bridge to the frontend.</p></section><section id="require-frontend" class="slide"><h2>RequireJS on the Frontend</h2>
 
+<ul><li>Data main starting point</li><li>Configuration</li><li>Module definitions</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
+
+<p>Let&#39;s start with a main insertion point.</p><textarea id="code" name="code" mode="xml" style="display: none;" class="code"><script data-main="./lib-client/main"
+        src="./lib-client/vendor/require-2.1.1.js"
+        type="text/javascript"></script></textarea></section><section id="require-config" class="slide"><h2>RequireJS Configuration</h2>
+
+<p>TODO</p>
+
 <p>TODO - HERE</p>
 
-<ul><li><p>Match version dependencies (underscore).</p></li><li><p>Module definitions</p></li><li>Data main starting point</li><li>Configuration</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
-
-<p>Let&#39;s start with a main insertion point.</p>
-
-<p>TODO</p></section><section id="require-client-integration" class="slide"><h2>TODO</h2>
-
-<p>TODO</p></section><section id="other-resources" class="slide"><h2>TODO</h2>
+<ul><li>Match version dependencies (underscore).</li></ul></section><section id="other-resources" class="slide"><h2>TODO</h2>
 
 <p>TODO</p></section><section id="extra" class="slide"><h2>Extra Notes</h2>
 
 <p>TODO: HERE -- basics and outline rest.</p>
 
-<ul><li>Basic syntax.</li><li>RequireJS on the frontend.</li><li>RequireJS on the backend.</li><li>Shared code.</li><li>Bundling.</li><li>Plugins.</li><li><p>Curiosity Media use cases.</p><ul><li>Validation</li><li><p>Internationalization</p></li></ul></li><li><p>[jsplayground]: http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction</p></li></ul></section><!-- deck.navigation snippet--><a href="#" title="Previous" class="deck-prev-link">&#8592;</a><a href="#" title="Next" class="deck-next-link">&#8594;</a><!-- deck.status snippet--><p class="deck-status"><span class="deck-status-current"></span>/<span class="deck-status-total"></span></p><!-- deck.goto snippet--><form action="." method="get" class="goto-form"><label for="goto-slide">Go to slide:</label><input id="goto-slide" type="text" name="slidenum" list="goto-datalist"><datalist id="goto-datalist"></datalist><input type="submit" value="Go"></form><!--deck.hash snippet--><a href="." title="Permalink to this slide" class="deck-permalink">#</a></div><!-- Required JS files.--><script src="js/vendor/jquery-1.8.2.min.js"></script><script src="js/vendor/coffee-script-1.4.0.min.js"></script><script src="core/deck.core.js"></script><!-- Plugin: CodeMirror (with CoffeeScript enhancements).--><script src="plugins/codemirror/codemirror.js"></script><script src="plugins/codemirror/mode/javascript/javascript.js"></script><script src="plugins/codemirror/mode/coffeescript/coffeescript.js"></script><script src="plugins/codemirror/deck.codemirror.js"></script><!-- Extension JS files. Add or remove as needed.--><script src="extensions/hash/deck.hash.js"></script><script src="extensions/menu/deck.menu.js"></script><script src="extensions/goto/deck.goto.js"></script><script src="extensions/status/deck.status.js"></script><script src="extensions/navigation/deck.navigation.js"></script><script src="extensions/scale/deck.scale.js"></script><!-- Initialize the deck.--><script>$(function() {
+<ul><li>Basic syntax.</li><li>RequireJS on the frontend.</li><li>RequireJS on the backend.</li><li>Shared code.</li><li>Bundling.</li><li>Plugins.</li><li><p>Curiosity Media use cases.</p><ul><li>Validation</li><li><p>Internationalization</p></li></ul></li><li><p>[jsplayground]: http://javascriptplayground.com/blog/2012/07/requirejs-amd-tutorial-introduction</p></li></ul></section><!-- deck.navigation snippet--><a href="#" title="Previous" class="deck-prev-link">&#8592;</a><a href="#" title="Next" class="deck-next-link">&#8594;</a><!-- deck.status snippet--><p class="deck-status"><span class="deck-status-current"></span>/<span class="deck-status-total"></span></p><!-- deck.goto snippet--><form action="." method="get" class="goto-form"><label for="goto-slide">Go to slide:</label><input id="goto-slide" type="text" name="slidenum" list="goto-datalist"><datalist id="goto-datalist"></datalist><input type="submit" value="Go"></form><!--deck.hash snippet--><a href="." title="Permalink to this slide" class="deck-permalink">#</a></div><!-- Required JS files.--><script src="js/vendor/jquery-1.8.2.min.js"></script><script src="js/vendor/coffee-script-1.4.0.min.js"></script><script src="core/deck.core.js"></script><!-- Plugin: CodeMirror (with CoffeeScript enhancements).--><script src="plugins/codemirror/codemirror.js"></script><script src="plugins/codemirror/mode/javascript/javascript.js"></script><script src="plugins/codemirror/mode/coffeescript/coffeescript.js"></script><script src="plugins/codemirror/mode/xml/xml.js"></script><script src="plugins/codemirror/deck.codemirror.js"></script><!-- Extension JS files. Add or remove as needed.--><script src="extensions/hash/deck.hash.js"></script><script src="extensions/menu/deck.menu.js"></script><script src="extensions/goto/deck.goto.js"></script><script src="extensions/status/deck.status.js"></script><script src="extensions/navigation/deck.navigation.js"></script><script src="extensions/scale/deck.scale.js"></script><!-- Demo--><script src="demo/lib-client/vendor/underscore-min-1.4.2.js"></script><!-- Initialize the deck.--><script>$(function() {
   $.deck('.slide', {
     codemirror: {
       lineNumbers: true,
