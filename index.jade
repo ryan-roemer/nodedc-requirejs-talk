@@ -46,12 +46,21 @@ block slides
 
   section.slide#sample-code
     :markdown
-      ## Sample Code
+      ## Shuffle!
 
-      TODO -- Just dive right in to shared sample code
-      (without header at first)
+      Looks like a basic Node.js backend function with a dependency on
+      [underscore][underscore].
 
-      * TODO: Have a dependency on underscore
+      [underscore]: http://underscorejs.org/
+
+    textarea.code#code(name="code", mode="javascript", runnable="false", style="display: none;").
+      var _ = require('underscore');
+
+      // Shuffle a list (space/comma separated).
+      var shuffle = function (val) {
+        val = val || "";
+        return _.shuffle(val.split(/[\s,]+/));
+      };
 
   section.slide#require-frontend
     :markdown

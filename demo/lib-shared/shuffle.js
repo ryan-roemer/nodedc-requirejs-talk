@@ -11,7 +11,7 @@ define(function(require) {
   var shuffle = function (val) {
     val = val || "";
     return _.shuffle(val.split(/[\s,]+/));
-  }
+  };
 
   // Return value is exported.
   return shuffle;
