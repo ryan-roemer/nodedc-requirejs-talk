@@ -4,7 +4,7 @@
 a framework for defining JavaScript modules and dependencies for
 predictable loading.</p>
 
-<ul><li>A fork of / transport for <a href="http://www.commonjs.org/">CommonJS</a></li><li>Brings <code>require</code>-like support to the frontend.</li></ul></section><section id="why" class="slide"><h2>Why AMD?</h2>
+<ul><li>A fork of / transport for <a href="http://www.commonjs.org/">CommonJS</a></li><li>Brings <code>require</code>-like support to the frontend</li></ul></section><section id="why" class="slide"><h2>Why AMD?</h2>
 
 <ul><li>Frontend JavaScript dependencies are a mess.</li><li>Allow us the real potential to have <strong>shared</strong> code between the
 frontend and a backend Node.js server.</li></ul></section><section id="demo" class="slide"><h2>Our Project</h2>
@@ -32,8 +32,8 @@ function shuffle (val) {
 // Examples
 console.log(shuffle("1 2 3 4"));</textarea></section><section id="amd-wrap" class="slide"><h2>Wrap Shared Code</h2>
 
-<p>Add <a href="https://github.com/jrburke/amdefine">amdefine</a> module boilerplate to get <code>define</code> ready for
-Node.js/browser in &quot;lib-shared/shuffle.js&quot;:</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
+<p>Use <a href="https://github.com/jrburke/amdefine">amdefine</a> boilerplate to make <code>define</code> available to
+Node.js in &quot;lib-shared/shuffle.js&quot;:</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
   var define = require('amdefine')(module);
 }
 
