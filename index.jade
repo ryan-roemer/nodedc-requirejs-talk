@@ -69,9 +69,8 @@ block slides
     :markdown
       ## Wrap Shared Code
 
-      Use the [amdefine][amdefine] module in a standard boilerplate and
-      wrap our module in a `define` so it is available to Node.js and the
-      browser.
+      Add [amdefine][amdefine] module boilerplate to get `define` ready for
+      Node.js/browser in "lib-shared/shuffle.js":
 
       [amdefine]: https://github.com/jrburke/amdefine
 
@@ -99,7 +98,7 @@ block slides
       [api]: http://127.0.0.1:3003/shuffle?val=1+2+3+4+5
 
     textarea.code#code(name="code", mode="javascript", style="display: none;").
-      // At the top...
+      // At the top, a standard Node.js require ...
       var shuffle = require('../lib-shared/shuffle');
 
       // ... meanwhile, in our Express setup.
@@ -115,7 +114,7 @@ block slides
     :markdown
       ## RequireJS
 
-      Now, on to the browser...
+      *Now, on to the browser...*
 
       [RequireJS][requirejs] is an AMD-compatible script loader with features
       including:
@@ -138,13 +137,16 @@ block slides
               src="./lib-client/vendor/require-2.1.1.js"
               type="text/javascript"></script>
     //-
+    p
+
+    :markdown
+      From here on, there are *no other* script includes!
 
   section.slide#require-config
     :markdown
       ## RequireJS Configuration
 
-      Now configure "main.js" to point to our client libraries. (Remember
-      to *match* library versions for shared code).
+      Configure "lib-client/main.js" to point to our client libraries.
 
     textarea.code#code(name="code", mode="javascript", style="display: none;").
       require.config({
@@ -226,5 +228,5 @@ block slides
     div
       a(href="http://www.spanishdict.com/") SpanishDict.com
       |  is&nbsp;
-      a(href="http://www.spanishdict.com/") hiring
+      a(href="http://www.spanishdict.com/careers") hiring
       | !
