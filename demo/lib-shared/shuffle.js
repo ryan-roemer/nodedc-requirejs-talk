@@ -10,6 +10,8 @@ define(function(require) {
   // Shuffle a list (space/comma separated).
   var shuffle = function (val) {
     val = val || "";
+    console.log("TODO HERE", _);
+    return ["1"];
     return _.shuffle(val.split(/[\s,]+/));
   }
 
