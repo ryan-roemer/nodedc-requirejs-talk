@@ -7,6 +7,25 @@ talk, "[Shared Code with RequireJS][meetup]".
 [nodedc]: http://nodedc.github.com/
 [meetup]: http://www.meetup.com/node-dc/events/89233812/
 
+
+Building the Slide Deck
+=======================
+
+To re-build this slide deck from Jade sources:
+
+    $ npm install
+    $ npm run-script watch
+
+
+Demo Application
+================
+
+To run the demo application server showing off shared frontend/backend code:
+
+    $ npm install
+    $ npm run-script server
+
+
 Licenses
 ========
 All code not otherwise specified is Copyright 2012 Ryan Roemer.
