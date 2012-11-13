@@ -37,19 +37,25 @@ block slides
           lib-server/server.js
           lib-client/main.js
 
+      And some modules in `package.json` for our Node.js server:
+
+          "express":    "3.0.2",
+          "amdefine":   "0.0.2",
+          "underscore": "1.4.2"
+
   section.slide#sample-code
     :markdown
       ## Shuffle!
 
-      Looks like a basic Node.js backend function with a dependency on
-      [underscore][underscore].
+      Our function looks like a basic Node.js backend function with a
+      dependency on [underscore][underscore].
 
       [underscore]: http://underscorejs.org/
 
     textarea.code#code(name="code", mode="javascript",
                        runnable="true", globals="_", style="display: none;").
       // Shuffle a list string.
-      var shuffle = function (val) {
+      function shuffle (val) {
         val = val || "";
         return _.shuffle(val.split(/[\s,]+/));
       };
@@ -59,12 +65,13 @@ block slides
     //-
 
 
-  section.slide#require-nodejs
+  section.slide#amd-wrap
     :markdown
-      ## Prep for AMD
+      ## Wrap Shared Code
 
       Use the [amdefine][amdefine] module in a standard boilerplate and
-      wrap our module in a `define`.
+      wrap our module in a `define` so it is available to Node.js and the
+      browser.
 
       [amdefine]: https://github.com/jrburke/amdefine
 
@@ -108,30 +115,23 @@ block slides
     :markdown
       ## RequireJS
 
-      [RequireJS][requirejs] is an AMD-compatible script loader (and much
-      more) with features including:
+      Now, on to the browser...
+
+      [RequireJS][requirejs] is an AMD-compatible script loader with features
+      including:
 
       * **Asynchronous** script loading
       * Frontend asset **bundling**
       * **Plugins**: Internationalization, text (templates)
 
-      We will use this as our bridge to the frontend.
-
       [requirejs]: http://requirejs.org/
-
-  section.slide#require-frontend
-    :markdown
-      ## RequireJS on the Frontend
-
-      * Data main starting point
-      * Configuration
-      * Module definitions
 
   section.slide#require-data-main
     :markdown
       ## RequireJS Main
 
-      Let's start with a main insertion point.
+      Let's start with a main insertion point. (The are *no other* script
+      includes!)
 
     textarea.code#code(name="code", mode="xml", style="display: none;").
       <script data-main="./lib-client/main"
@@ -143,12 +143,53 @@ block slides
     :markdown
       ## RequireJS Configuration
 
-      TODO
+      Now configure "main.js" to point to our client libraries. (Remember
+      to *match* library versions for shared code).
+
+    textarea.code#code(name="code", mode="javascript", style="display: none;").
+      require.config({
+        shim: {
+          "underscore": { exports: "_" },
+          "bootstrap": {
+            deps: ["jquery"],
+            exports: "$"
+          }
+        },
+        paths: {
+          "underscore": "vendor/underscore-min-1.4.2",
+          "jquery":     "vendor/jquery-min-1.8.1",
+          "bootstrap":  "vendor/bootstrap-min-2.2.1"
+        },
+      });
+    //-
 
 
-      TODO - HERE
+  section.slide#client
+    :markdown
+      ## Shuffle in the Browser
 
-      * Match version dependencies (underscore).
+      From here, we can `define` our client-side JavaScript code and
+      see it in the [demo][demo].
+
+      [demo]: http://127.0.0.1:3003/
+
+    textarea.code#code(name="code", mode="javascript", style="display: none;").
+      require([
+        "bootstrap",
+        "../lib-shared/shuffle"
+      ], function($, shuffle) {
+        $(function () {
+          // Bind shuffle to the client side form.
+          $("form#client").submit(function () {
+            var input = $("form#client #input").val(),
+              $output = $("form#client #output");
+
+            $output.text(shuffle(input).join(", "));
+            return false;
+          });
+        });
+      });
+    //-
 
   section.slide#other-resources
     :markdown

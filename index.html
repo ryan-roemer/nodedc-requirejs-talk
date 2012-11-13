@@ -13,21 +13,28 @@ frontend and a backend Node.js server.</li></ul></section><section id="demo" cla
 
 <pre><code>lib-shared/shuffle.js
 lib-server/server.js
-lib-client/main.js
+lib-client/main.js</code></pre>
+
+<p>And some modules in <code>package.json</code> for our Node.js server:</p>
+
+<pre><code>&quot;express&quot;:    &quot;3.0.2&quot;,
+&quot;amdefine&quot;:   &quot;0.0.2&quot;,
+&quot;underscore&quot;: &quot;1.4.2&quot;
 </code></pre></section><section id="sample-code" class="slide"><h2>Shuffle!</h2>
 
-<p>Looks like a basic Node.js backend function with a dependency on
-<a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" runnable="true" globals="_" style="display: none;" class="code">// Shuffle a list string.
-var shuffle = function (val) {
+<p>Our function looks like a basic Node.js backend function with a
+dependency on <a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" runnable="true" globals="_" style="display: none;" class="code">// Shuffle a list string.
+function shuffle (val) {
   val = val || "";
   return _.shuffle(val.split(/[\s,]+/));
 };
 
 // Examples
-console.log(shuffle("1 2 3 4"));</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for AMD</h2>
+console.log(shuffle("1 2 3 4"));</textarea></section><section id="amd-wrap" class="slide"><h2>Wrap Shared Code</h2>
 
 <p>Use the <a href="https://github.com/jrburke/amdefine">amdefine</a> module in a standard boilerplate and
-wrap our module in a <code>define</code>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
+wrap our module in a <code>define</code> so it is available to Node.js and the
+browser.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
   var define = require('amdefine')(module);
 }
 
@@ -51,24 +58,50 @@ app.get("/shuffle", function (req, res) {
   return res.json(shuffled, 200);
 });</textarea></section><section id="require" class="slide"><h2>RequireJS</h2>
 
-<p><a href="http://requirejs.org/">RequireJS</a> is an AMD-compatible script loader (and much
-more) with features including:</p>
+<p>Now, on to the browser...</p>
 
-<ul><li><strong>Asynchronous</strong> script loading</li><li>Frontend asset <strong>bundling</strong></li><li><strong>Plugins</strong>: Internationalization, text (templates)</li></ul>
+<p><a href="http://requirejs.org/">RequireJS</a> is an AMD-compatible script loader with features
+including:</p>
 
-<p>We will use this as our bridge to the frontend.</p></section><section id="require-frontend" class="slide"><h2>RequireJS on the Frontend</h2>
+<ul><li><strong>Asynchronous</strong> script loading</li><li>Frontend asset <strong>bundling</strong></li><li><strong>Plugins</strong>: Internationalization, text (templates)</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
 
-<ul><li>Data main starting point</li><li>Configuration</li><li>Module definitions</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
-
-<p>Let&#39;s start with a main insertion point.</p><textarea id="code" name="code" mode="xml" style="display: none;" class="code"><script data-main="./lib-client/main"
+<p>Let&#39;s start with a main insertion point. (The are <em>no other</em> script
+includes!)</p><textarea id="code" name="code" mode="xml" style="display: none;" class="code"><script data-main="./lib-client/main"
         src="./lib-client/vendor/require-2.1.1.js"
         type="text/javascript"></script></textarea></section><section id="require-config" class="slide"><h2>RequireJS Configuration</h2>
 
-<p>TODO</p>
+<p>Now configure &quot;main.js&quot; to point to our client libraries. (Remember
+to <em>match</em> library versions for shared code).</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">require.config({
+  shim: {
+    "underscore": { exports: "_" },
+    "bootstrap": {
+      deps: ["jquery"],
+      exports: "$"
+    }
+  },
+  paths: {
+    "underscore": "vendor/underscore-min-1.4.2",
+    "jquery":     "vendor/jquery-min-1.8.1",
+    "bootstrap":  "vendor/bootstrap-min-2.2.1"
+  },
+});</textarea></section><section id="client" class="slide"><h2>Shuffle in the Browser</h2>
 
-<p>TODO - HERE</p>
-
-<ul><li>Match version dependencies (underscore).</li></ul></section><section id="other-resources" class="slide"><h2>TODO</h2>
+<p>From here, we can <code>define</code> our client-side JavaScript code and
+see it in the <a href="http://127.0.0.1:3003/">demo</a>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">require([
+  "bootstrap",
+  "../lib-shared/shuffle"
+], function($, shuffle) {
+  $(function () {
+    // Bind shuffle to the client side form.
+    $("form#client").submit(function () {
+      var input = $("form#client #input").val(),
+        $output = $("form#client #output");
+        
+      $output.text(shuffle(input).join(", "));
+      return false;
+    });
+  });
+});</textarea></section><section id="other-resources" class="slide"><h2>TODO</h2>
 
 <p>TODO</p></section><section id="extra" class="slide"><h2>Extra Notes</h2>
 
