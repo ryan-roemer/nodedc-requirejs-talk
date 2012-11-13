@@ -19,17 +19,17 @@ require.config({
 });
 
 require([
-  "bootstrap",
-  "../lib-shared/shuffle"
+  "jquery",
+  "../lib-shared/shuffle",
+  "bootstrap"
 ], function($, shuffle) {
   $(function () {
     // Bind shuffle to the client side form.
     $("form#client").submit(function () {
       var input = $("form#client #input").val(),
-        shuffled = shuffle(input),
         $output = $("form#client #output");
 
-      $output.text(shuffled.join(", "));
+      $output.text(shuffle(input).join(", "));
 
       return false;
     });
