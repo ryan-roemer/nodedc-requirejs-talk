@@ -53,7 +53,7 @@ block slides
 
       [underscore]: http://underscorejs.org/
 
-    textarea.code#code(name="code", mode="javascript", runnable="false", style="display: none;").
+    textarea.code#code(name="code", mode="javascript", style="display: none;").
       var _ = require('underscore');
 
       // Shuffle a list (space/comma separated).
@@ -62,9 +62,44 @@ block slides
         return _.shuffle(val.split(/[\s,]+/));
       };
 
+  section.slide#require-nodejs
+    :markdown
+      ## Prep for RequireJS
+
+      Use the [amdefine][amdefine] module in a standard boilerplate.
+
+      [amdefine]: https://github.com/jrburke/amdefine
+
+    textarea.code#code(name="code", mode="javascript", style="display: none;").
+      if (typeof define !== 'function') {
+        var define = require('amdefine')(module);
+      }
+
+  section.slide#express
+    :markdown
+      ## Express REST API
+
+      Let's create a JSON REST API with our new function.
+
+    textarea.code#code(name="code", mode="javascript", style="display: none;").
+      // At the top...
+      var shuffle = require('../lib-shared/shuffle');
+
+      // ... meanwhile, in our Express setup.
+      app.get("/shuffle", function (req, res) {
+        var input = req.param('val'),
+          shuffled = shuffle(input);
+
+        return res.json(shuffled, 200);
+      });
+
   section.slide#require-frontend
     :markdown
       ## RequireJS on the Frontend
+
+      TODO - HERE
+
+      * Match version dependencies (underscore).
 
       * Module definitions
       * Data main starting point
@@ -84,13 +119,6 @@ block slides
 
       TODO
 
-  section.slide#require-nodejs
-    :markdown
-      ## TODO
-
-      TODO
-
-      * Match version dependencies (underscore).
 
   section.slide#other-resources
     :markdown

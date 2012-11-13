@@ -15,26 +15,41 @@ more) with features including:</p>
 <ul><li>Sensible <strong>module definition</strong> format</li><li><strong>Asynchronous</strong> script loading</li><li>Frontend asset <strong>bundling</strong></li><li><strong>Plugins</strong>: Internationalization, text (templates)</li><li><strong>Node.js</strong> compatibility</li></ul></section><section id="sample-code" class="slide"><h2>Shuffle!</h2>
 
 <p>Looks like a basic Node.js backend function with a dependency on
-<a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" runnable="false" style="display: none;" class="code">var _ = require('underscore');
+<a href="http://underscorejs.org/">underscore</a>.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">var _ = require('underscore');
 
 // Shuffle a list (space/comma separated).
 var shuffle = function (val) {
   val = val || "";
   return _.shuffle(val.split(/[\s,]+/));
 };
+</textarea></section><section id="require-nodejs" class="slide"><h2>Prep for RequireJS</h2>
+
+<p>Use the <a href="https://github.com/jrburke/amdefine">amdefine</a> module in a standard boilerplate.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">if (typeof define !== 'function') {
+  var define = require('amdefine')(module);
+}
+</textarea></section><section id="express" class="slide"><h2>Express REST API</h2>
+
+<p>Let&#39;s create a JSON REST API with our new function.</p><textarea id="code" name="code" mode="javascript" style="display: none;" class="code">// At the top...
+var shuffle = require('../lib-shared/shuffle');
+
+// ... meanwhile, in our Express setup.
+app.get("/shuffle", function (req, res) {
+  var input = req.param('val'),
+    shuffled = shuffle(input);
+    
+  return res.json(shuffled, 200);
+});
 </textarea></section><section id="require-frontend" class="slide"><h2>RequireJS on the Frontend</h2>
 
-<ul><li>Module definitions</li><li>Data main starting point</li><li>Configuration</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
+<p>TODO - HERE</p>
+
+<ul><li><p>Match version dependencies (underscore).</p></li><li><p>Module definitions</p></li><li>Data main starting point</li><li>Configuration</li></ul></section><section id="require-data-main" class="slide"><h2>RequireJS Main</h2>
 
 <p>Let&#39;s start with a main insertion point.</p>
 
 <p>TODO</p></section><section id="require-client-integration" class="slide"><h2>TODO</h2>
 
-<p>TODO</p></section><section id="require-nodejs" class="slide"><h2>TODO</h2>
-
-<p>TODO</p>
-
-<ul><li>Match version dependencies (underscore).</li></ul></section><section id="other-resources" class="slide"><h2>TODO</h2>
+<p>TODO</p></section><section id="other-resources" class="slide"><h2>TODO</h2>
 
 <p>TODO</p></section><section id="extra" class="slide"><h2>Extra Notes</h2>
 
